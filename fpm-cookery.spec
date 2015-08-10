@@ -19,6 +19,7 @@ BuildRequires:	ruby-rake
 BuildRequires:	ruby-rspec < 4
 BuildRequires:	ruby-rspec >= 3.0
 %endif
+Requires:	curl
 Requires:	fpm < 2
 Requires:	fpm >= 1.1
 Requires:	ruby-addressable
