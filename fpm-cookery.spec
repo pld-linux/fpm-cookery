@@ -22,10 +22,10 @@ BuildRequires:	ruby-rspec >= 3.0
 Requires:	curl
 Requires:	fpm < 2
 Requires:	fpm >= 1.1
+Requires:	puppet < 4
+Requires:	puppet >= 3.4
 Requires:	ruby-addressable
 Requires:	ruby-facter
-Requires:	ruby-puppet < 4
-Requires:	ruby-puppet >= 3.4
 Requires:	ruby-systemu
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
