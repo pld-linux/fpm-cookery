@@ -27,6 +27,8 @@ Requires:	puppet >= 3.4
 Requires:	ruby-addressable
 Requires:	ruby-facter
 Requires:	ruby-systemu
+Suggests:	git-core
+Suggests:	subversion
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
