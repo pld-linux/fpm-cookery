@@ -25,6 +25,7 @@ Requires:	fpm < 2
 Requires:	fpm >= 1.1
 Requires:	puppet < 4
 Requires:	puppet >= 3.4
+Requires:	rpm-build
 Requires:	ruby-addressable
 Requires:	ruby-facter
 Requires:	ruby-systemu
