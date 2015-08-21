@@ -1,0 +1,11 @@
+--- ./lib/fpm/cookery/source_handler/svn.rb~	2015-08-19 12:40:42.000000000 +0300
++++ ./lib/fpm/cookery/source_handler/svn.rb	2015-08-19 15:33:21.999812179 +0300
+@@ -26,7 +26,7 @@
+         private
+         def svn(url, path)
+           revision = options[:revision] || 'HEAD'
+-          safesystem('svn', 'export', '--force', '-q', '-r', revision, url, path)
++          safesystem('svn', 'export', '--force', '--ignore-externals', '-q', '-r', revision, url, path)
+         end
+ 
+         def extracted_source

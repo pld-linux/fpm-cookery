@@ -5,11 +5,12 @@
 Summary:	A tool for building software packages with fpm
 Name:		fpm-cookery
 Version:	0.29.0
-Release:	0.1
+Release:	0.2
 License:	BSD
 Group:		Development/Languages
 Source0:	http://rubygems.org/downloads/%{name}-%{version}.gem
 # Source0-md5:	bd210d6acb6a0519f8d940200917eefe
+Patch0:		svn-ignore-externals.patch
 URL:		https://github.com/bernd/fpm-cookery
 BuildRequires:	rpm-rubyprov
 BuildRequires:	rpmbuild(macros) >= 1.656
@@ -37,6 +38,7 @@ A tool for building software packages with fpm.
 
 %prep
 %setup -q
+%patch0 -p1
 %{__sed} -i -e '1 s,#!.*ruby,#!%{__ruby},' bin/*
 
 %build
