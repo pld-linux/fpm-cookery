@@ -1,0 +1,58 @@
+diff --git a/lib/fpm/cookery/package/package.rb b/lib/fpm/cookery/package/package.rb
+index 4d80344..38ec07a 100644
+--- a/lib/fpm/cookery/package/package.rb
++++ b/lib/fpm/cookery/package/package.rb
+@@ -42,6 +42,9 @@ module FPM
+           # overwrite the values from package_setup().
+           @fpm.attributes.merge!(recipe.fpm_attributes)
+ 
++          # also merge fpm.attrs (for %attr flags, rpm specific)
++          @fpm.attrs.merge!(recipe.rpm_attributes)
++
+           # The input for the FPM package will be set here.
+           package_input
+ 
+diff --git a/lib/fpm/cookery/recipe.rb b/lib/fpm/cookery/recipe.rb
+index ab23ca3..628b4a2 100644
+--- a/lib/fpm/cookery/recipe.rb
++++ b/lib/fpm/cookery/recipe.rb
+@@ -42,6 +42,7 @@ module FPM
+         # class variable.
+         klass.instance_variable_set(:@fpm_attributes, self.fpm_attributes.dup)
+         klass.instance_variable_set(:@environment, self.environment.dup)
++        klass.instance_variable_set(:@rpm_attributes, self.rpm_attributes.dup)
+       end
+ 
+       def self.platforms(valid_platforms)
+@@ -101,11 +102,23 @@ module FPM
+           @fpm_attributes
+         end
+ 
++        # record attributes[foo] = bar
++        # Supports both hash and argument assignment
++        #   rpm_attributes[:attr1] = xxxx
++        #   rpm_attributes :xxxx=>1, :yyyy=>2
++        def rpm_attributes(args=nil)
++          if args.is_a?(Hash)
++            @rpm_attributes.merge!(args)
++          end
++          @rpm_attributes
++        end
++
+         def environment
+           @environment
+         end
+       end
+       @fpm_attributes = {}
++      @rpm_attributes = {}
+       @environment = FPM::Cookery::Environment.new
+ 
+       def initialize(filename, config)
+@@ -132,6 +145,7 @@ module FPM
+       def pkgdir(path = nil)   (@pkgdir   || workdir('pkg'))/path         end
+       def cachedir(path = nil) (@cachedir || workdir('cache'))/path       end
+       def fpm_attributes() self.class.fpm_attributes end
++      def rpm_attributes() self.class.rpm_attributes end
+       def environment()        self.class.environment                      end
+ 
+       # Resolve dependencies from omnibus package.
