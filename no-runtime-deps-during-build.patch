@@ -1,0 +1,18 @@
+https://github.com/bernd/fpm-cookery/issues/123
+
+diff --git a/lib/fpm/cookery/dependency_inspector.rb b/lib/fpm/cookery/dependency_inspector.rb
+index bd311dd..875833b 100644
+--- a/lib/fpm/cookery/dependency_inspector.rb
++++ b/lib/fpm/cookery/dependency_inspector.rb
+@@ -20,9 +20,9 @@ module FPM
+           return
+         end
+ 
+-        Log.info "Verifying build_depends and depends with Puppet"
++        Log.info "Verifying build_depends with Puppet"
+ 
+-        missing = missing_packages(build_depends + depends)
++        missing = missing_packages(build_depends)
+ 
+         if missing.length == 0
+           Log.info "All build_depends and depends packages installed"
