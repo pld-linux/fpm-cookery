@@ -1,10 +1,10 @@
 https://github.com/bernd/fpm-cookery/issues/123
 
 diff --git a/lib/fpm/cookery/dependency_inspector.rb b/lib/fpm/cookery/dependency_inspector.rb
-index bd311dd..875833b 100644
+index bd311dd..f4ab191 100644
 --- a/lib/fpm/cookery/dependency_inspector.rb
 +++ b/lib/fpm/cookery/dependency_inspector.rb
-@@ -20,9 +20,9 @@ module FPM
+@@ -20,12 +20,12 @@ module FPM
            return
          end
  
@@ -15,4 +15,8 @@ index bd311dd..875833b 100644
 +        missing = missing_packages(build_depends)
  
          if missing.length == 0
-           Log.info "All build_depends and depends packages installed"
+-          Log.info "All build_depends and depends packages installed"
++          Log.info "All build_depends packages installed"
+         else
+           Log.info "Missing/wrong version packages: #{missing.join(', ')}"
+           if Process.euid != 0
